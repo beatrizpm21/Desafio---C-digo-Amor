@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Level 1 — ❤️ Nosso Ano 1</title>
+  <meta name="theme-color" content="#0f172a" />
+  
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #111827;
+    --muted: #94a3b8;
+    --text: #e5e7eb;
+    --accent: #f472b6;
+    --accent-2: #a78bfa;
+    --success: #34d399;
+    --danger: #fb7185;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+  body {
+    background: radial-gradient(1200px 800px at 80% -10%, rgba(244,114,182,.25), transparent 60%), 
+                radial-gradient(800px 600px at -10% 110%, rgba(167,139,250,.25), transparent 60%),
+                var(--bg);
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  .card {
+    width: min(720px, 95vw);
+    background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    backdrop-filter: blur(8px);
+  }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .title {
+    font-weight: 800;
+    letter-spacing: .5px;
+    font-size: clamp(24px, 3.2vw, 36px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px 0;
+  }
+  .subtitle { color: var(--muted); margin: 0 0 18px 0; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 999px;
+    border: 1px dashed rgba(255,255,255,.18);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .code {
+    background: #0b1220; border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px; padding: 16px; overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    line-height: 1.5; font-size: 14px; position: relative;
+  }
+  .badge {
+    position: absolute; top: 8px; right: 12px;
+    font-size: 12px; color: var(--muted);
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 4px 8px; border-radius: 999px;
+  }
+  .btn {
+    appearance: none; border: 0; cursor: pointer;
+    padding: 12px 16px; border-radius: 12px;
+    font-weight: 600; transition: transform .05s ease, box-shadow .2s ease, background .2s ease;
+    background: linear-gradient(180deg, rgba(244,114,182,.22), rgba(167,139,250,.22));
+    color: white;
+    box-shadow: 0 6px 20px rgba(167,139,250,.25);
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,.12); box-shadow: none; color: var(--muted); }
+  .input {
+    width: 100%; padding: 12px 14px;
+    border-radius: 12px; border: 1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.25); color: #fff; outline: none;
+  }
+  .note { color: var(--muted); font-size: 14px; }
+  .divider { height: 1px; background: rgba(255,255,255,.08); margin: 16px 0; }
+  .footer { margin-top: 16px; display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px; }
+  a { color: #c4b5fd; }
+  .hidden { display: none; }
+</style>
+
+</head>
+<body>
+  <main class="card">
+    <h1 class="title">Level 1 <span style="font-size: 26px;">💘</span></h1>
+    <p class="subtitle">Uma pista curtinha pra quem programa — prometo que é facinho 😉</p>
+    
+    <div class="row" style="margin-bottom: 16px;">
+      <span class="chip">Dica: “tem sites que transformam e destransformam isso”</span>
+      <span class="chip">Objetivo: descobrir a <strong>palavra</strong> secreta</span>
+    </div>
+
+    <div class="code">
+      <span class="badge">Base64</span>
+<pre><code>cGFyYWJlbnM=</code></pre>
+    </div>
+
+    <div style="margin-top: 16px;" class="row">
+      <input id="answer" class="input" placeholder="Digite aqui a palavra secreta" autocomplete="off" />
+      <button class="btn" onclick="check()">Verificar</button>
+      <button class="btn ghost" onclick="hint()">Preciso de dica</button>
+    </div>
+    <p id="hint" class="note hidden" style="margin-top:10px;">Joga esse texto em um decodificador Base64 online. A palavra é toda minúscula 😉</p>
+
+    <div id="ok" class="hidden" style="margin-top: 16px;">
+      <div class="divider"></div>
+      <p>Uau! Você desbloqueou o link secreto 🎉</p>
+      <a class="btn" href="./carta.html">Abrir a próxima página</a>
+    </div>
+
+    <div id="bad" class="hidden" style="margin-top: 16px; color: var(--danger);">
+      Hmm… ainda não. Tenta outra! 🧩
+    </div>
+
+    <div class="footer">
+      <span>Feito com carinho por você ✨</span>
+      <span>•</span>
+      <span class="note">Dica extra: “base64 decode” no Google ajuda!</span>
+    </div>
+  </main>
+
+<script>
+  function normalize(s) { return (s || "").trim().toLowerCase(); }
+  function check() {
+    const ok = document.getElementById('ok');
+    const bad = document.getElementById('bad');
+    const val = normalize(document.getElementById('answer').value);
+    if (val === "parabens") {
+      ok.classList.remove('hidden');
+      bad.classList.add('hidden');
+    } else {
+      ok.classList.add('hidden');
+      bad.classList.remove('hidden');
+    }
+  }
+  function hint() {
+    document.getElementById('hint').classList.remove('hidden');
+  }
+</script>
+</body>
+</html>

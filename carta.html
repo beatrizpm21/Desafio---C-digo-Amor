@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>❤️ 1 ano de nós</title>
+  <meta name="theme-color" content="#0f172a" />
+  
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #111827;
+    --muted: #94a3b8;
+    --text: #e5e7eb;
+    --accent: #f472b6;
+    --accent-2: #a78bfa;
+    --success: #34d399;
+    --danger: #fb7185;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+  body {
+    background: radial-gradient(1200px 800px at 80% -10%, rgba(244,114,182,.25), transparent 60%), 
+                radial-gradient(800px 600px at -10% 110%, rgba(167,139,250,.25), transparent 60%),
+                var(--bg);
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  .card {
+    width: min(720px, 95vw);
+    background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    backdrop-filter: blur(8px);
+  }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .title {
+    font-weight: 800;
+    letter-spacing: .5px;
+    font-size: clamp(24px, 3.2vw, 36px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px 0;
+  }
+  .subtitle { color: var(--muted); margin: 0 0 18px 0; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 999px;
+    border: 1px dashed rgba(255,255,255,.18);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .code {
+    background: #0b1220; border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px; padding: 16px; overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    line-height: 1.5; font-size: 14px; position: relative;
+  }
+  .badge {
+    position: absolute; top: 8px; right: 12px;
+    font-size: 12px; color: var(--muted);
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 4px 8px; border-radius: 999px;
+  }
+  .btn {
+    appearance: none; border: 0; cursor: pointer;
+    padding: 12px 16px; border-radius: 12px;
+    font-weight: 600; transition: transform .05s ease, box-shadow .2s ease, background .2s ease;
+    background: linear-gradient(180deg, rgba(244,114,182,.22), rgba(167,139,250,.22));
+    color: white;
+    box-shadow: 0 6px 20px rgba(167,139,250,.25);
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,.12); box-shadow: none; color: var(--muted); }
+  .input {
+    width: 100%; padding: 12px 14px;
+    border-radius: 12px; border: 1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.25); color: #fff; outline: none;
+  }
+  .note { color: var(--muted); font-size: 14px; }
+  .divider { height: 1px; background: rgba(255,255,255,.08); margin: 16px 0; }
+  .footer { margin-top: 16px; display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px; }
+  a { color: #c4b5fd; }
+  .hidden { display: none; }
+</style>
+
+</head>
+<body>
+  <main class="card">
+    <h1 class="title">Feliz 1 ano, meu amor! <span style="font-size: 26px;">🥹✨</span></h1>
+    <p class="subtitle">Data: 23/08/2025</p>
+
+    <section id="texto" style="display: grid; gap: 10px; font-size: 18px; line-height: 1.7;">
+      <p>Eu queria te dar algo que tivesse a sua cara — um pouquinho de código, e um montão de amor.</p>
+      <p>Nesse último ano, você me fez sentir acolhida, especial e segura. Obrigada por cada gesto, cada risada e cada mensagem fofa no meio do dia.</p>
+      <p>Eu admiro demais seu brilho quando fala de tecnologia, dos seus projetos e sonhos. E eu quero estar do seu lado em cada conquista.</p>
+      <p>Que venham muitos commits de amor, deploys de risada e sprints de abraços. Te amo muito. 💗</p>
+      <p style="opacity:.8">— Assinado: [seu nome]</p>
+    </section>
+
+    <div class="divider"></div>
+    <div class="row">
+      <a class="btn" href="./index.html">Voltar ao início</a>
+      <button class="btn ghost" onclick="toggleEdit()">Editar texto (local)</button>
+      <button class="btn" onclick="save()">Salvar em .txt</button>
+    </div>
+    <p class="note" style="margin-top: 10px;">Você pode clicar em “Editar texto (local)” para ajustar a carta aqui mesmo (não envia nada pra internet). O botão “Salvar em .txt” baixa uma cópia do que você escreveu.</p>
+  </main>
+
+<script>
+  let editing = false;
+  function toggleEdit() {
+    const section = document.getElementById('texto');
+    if (!editing) {
+      // Transform paragraphs into a textarea for quick editing
+      const content = Array.from(section.querySelectorAll('p')).map(p => p.innerText).join("\n\n");
+      section.innerHTML = `<textarea id="editor" class="input" style="min-height: 260px;">${content}</textarea>`;
+    } else {
+      const value = document.getElementById('editor').value;
+      section.innerHTML = value.split(/\n\n+/).map(p => `<p>${p}</p>`).join("");
+    }
+    editing = !editing;
+  }
+  function save() {
+    let text = "";
+    const editor = document.getElementById('editor');
+    if (editor) {
+      text = editor.value;
+    } else {
+      text = Array.from(document.getElementById('texto').querySelectorAll('p')).map(p => p.innerText).join("\n\n");
+    }
+    const blob = new Blob([text], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "carta-1-ano.txt";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body>
+</html>
